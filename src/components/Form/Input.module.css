@@ -3,25 +3,44 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
+
 }
 
 .input label {
    margin: 2rem;
    font-size: 2rem;
+   color: white;
+   font-weight: bold;
 }
 
 
 .input input {
    height: 2rem;
-   width: 70%;
+   width: 50%;
    border-radius: 12px;
    border: 0.5px solid rgb(59, 54, 54);
+   padding: 1rem;
+   margin-right: 2rem;
 }
 
-.input input:focus {
+.input select {
+   padding: 0.25rem;
+   background-color: white;
+   border: none;
+   border-radius: 12px;
+   text-align: center;
+}
+
+.inputs-div {
+   /* width: 100%; */
+   display: flex;
+   justify-content: center;
+}
+
+.input input .input input:focus {
    outline: none;
 }
 
-.input input[type="text"]::placeholder {
+/* .input input[type="text"]::placeholder {
    text-align: center;
-}
+} */

@@ -1,6 +1,7 @@
 .button {
-   background-color: rgb(187, 212, 235);
-   color: black;
+   background-color: rgb(36, 48, 59);
+   color: white;
+   font-weight: 500;
    width: 6rem;
    padding: 0.5rem;
    border: none;

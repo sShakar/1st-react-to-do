@@ -1,17 +1,47 @@
+import { useState } from 'react';
 import Card from '../UI/Card/Card';
 import Button from '../UI/Button/Button';
 import classes from './Input.module.css';
 
 const Input = (props) => {
+  const [newTodo, setNewTodo] = useState('');
+
+  const onInputHandler = (e) => {
+    setNewTodo(e.target.value.trim());
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+    if (newTodo !== undefined && newTodo !== '') {
+      props.handleTodos(newTodo);
+    }
+    console.log('Entered To Do:');
+    console.log(newTodo);
   };
+
   return (
     <Card>
-      <form className={classes['input']} onSubmit={submitHandler}>
+      <form
+        className={`${classes['input']} align-middle`}
+        onSubmit={submitHandler}
+      >
         <label htmlFor="to-do">Enter a To-Do</label>
-        <input id="to-do" type="text" placeholder="Enter a To-Do" />
-        <Button>Add To-Do</Button>
+        <div className={`${classes['inputs-div']} align-middle  w-full`}>
+          <input
+            className="mr-8 w-1/2"
+            value={newTodo}
+            id="to-do"
+            type="text"
+            placeholder="Enter a To-Do"
+            onChange={onInputHandler}
+          />
+          <select name="todos" id="" className="w-1/4">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="Uncompleted">Uncompleted</option>
+          </select>
+        </div>
+        <Button type="submit">Add To-Do</Button>
       </form>
     </Card>
   );

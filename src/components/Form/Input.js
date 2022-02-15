@@ -15,8 +15,7 @@ const Input = (props) => {
     if (newTodo !== undefined && newTodo !== '') {
       props.handleTodos(newTodo);
     }
-    console.log('Entered To Do:');
-    console.log(newTodo);
+    setNewTodo('');
   };
 
   return (

@@ -22,20 +22,22 @@ function App() {
         todo: newTodo,
       },
     ]);
-    console.log('The ToDo Array State:');
-    console.log(todos);
   };
 
   const printToDos = (todos) => {
-    return todos.map((item) => {
-      return <ToDo id={item.id} todo={item.todo} />;
-    });
+    return (
+      <ul>
+        {todos.map((item) => {
+          return <ToDo key={item.id} todo={item.todo} />;
+        })}
+      </ul>
+    );
   };
 
   return (
     <Fragment>
       <Input handleTodos={handleTodos} />
-      <ul>{printToDos(todos)}</ul>
+      {printToDos(todos)}
     </Fragment>
   );
 }

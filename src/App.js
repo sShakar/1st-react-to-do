@@ -28,7 +28,9 @@ function App() {
     return (
       <ul>
         {todos.map((item) => {
-          return <ToDo key={item.id} todo={item.todo} />;
+          return (
+            <ToDo key={item.id} todo={item} todos={todos} setTodos={setTodos} />
+          );
         })}
       </ul>
     );

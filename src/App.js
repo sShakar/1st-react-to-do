@@ -20,6 +20,7 @@ function App() {
       {
         id: Math.random() * 10,
         todo: newTodo,
+        completed: false,
       },
     ]);
   };

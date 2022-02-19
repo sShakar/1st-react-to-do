@@ -19,7 +19,6 @@ const Input = (props) => {
   };
 
   const selectionHandler = (e) => {
-    console.log(e.target.value);
     props.setSelection(e.target.value);
   };
 

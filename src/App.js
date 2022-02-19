@@ -8,8 +8,12 @@ function App() {
   const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => {
-    console.log('Re Render');
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
     filterHandler();
+    saveLocalTodos();
   }, [todos, selection]);
 
   const filterHandler = () => {
@@ -37,28 +41,35 @@ function App() {
     ]);
   };
 
-  const printToDos = (todos) => {
+  const printToDos = (todos, filteredTodos) => {
     return (
       <ul>
-        {todos.map((item) => {
+        {filteredTodos.map((item) => {
           return (
-            <ToDo
-              key={item.id}
-              todo={item}
-              todos={todos}
-              setTodos={setTodos}
-              selection={selection}
-            />
+            <ToDo key={item.id} todo={item} todos={todos} setTodos={setTodos} />
           );
         })}
       </ul>
     );
   };
 
+  // Saving our data to local storage so it doesn't reset on refresh
+  const saveLocalTodos = () => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  };
+  const getLocalTodos = () => {
+    if (localStorage.getItem('todos') === null) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem('todos'));
+      setTodos(todoLocal);
+    }
+  };
+
   return (
     <Fragment>
       <Input handleTodos={handleTodos} setSelection={setSelection} />
-      {printToDos(filteredTodos)}
+      {printToDos(todos, filteredTodos)}
     </Fragment>
   );
 }

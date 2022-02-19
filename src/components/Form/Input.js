@@ -18,6 +18,11 @@ const Input = (props) => {
     setNewTodo('');
   };
 
+  const selectionHandler = (e) => {
+    console.log(e.target.value);
+    props.setSelection(e.target.value);
+  };
+
   return (
     <Card>
       <form
@@ -34,10 +39,15 @@ const Input = (props) => {
             placeholder="Enter a To-Do"
             onChange={onInputHandler}
           />
-          <select name="todos" id="" className="w-1/4">
+          <select
+            onChange={selectionHandler}
+            name="todos"
+            id=""
+            className="w-1/4"
+          >
             <option value="all">All</option>
             <option value="completed">Completed</option>
-            <option value="Uncompleted">Uncompleted</option>
+            <option value="uncompleted">Uncompleted</option>
           </select>
         </div>
         <Button type="submit">Add To-Do</Button>

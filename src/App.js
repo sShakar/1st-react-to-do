@@ -4,15 +4,27 @@ import ToDo from './components/ToDo/ToDo';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [selection, setSelection] = useState('all');
+  const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => {
-    if (todos.length === 0) {
-      setIsEmpty(true);
-    } else {
-      setIsEmpty(false);
+    console.log('Re Render');
+    filterHandler();
+  }, [todos, selection]);
+
+  const filterHandler = () => {
+    switch (selection) {
+      case 'completed':
+        setFilteredTodos(todos.filter((todo) => todo.completed)); // We filter out the ones that are completed
+        break;
+      case 'uncompleted':
+        setFilteredTodos(todos.filter((todo) => !todo.completed)); // We filter out the ones that are completed
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
     }
-  }, [todos]);
+  };
 
   const handleTodos = (newTodo) => {
     setTodos((prevTodos) => [
@@ -30,7 +42,13 @@ function App() {
       <ul>
         {todos.map((item) => {
           return (
-            <ToDo key={item.id} todo={item} todos={todos} setTodos={setTodos} />
+            <ToDo
+              key={item.id}
+              todo={item}
+              todos={todos}
+              setTodos={setTodos}
+              selection={selection}
+            />
           );
         })}
       </ul>
@@ -39,8 +57,8 @@ function App() {
 
   return (
     <Fragment>
-      <Input handleTodos={handleTodos} />
-      {printToDos(todos)}
+      <Input handleTodos={handleTodos} setSelection={setSelection} />
+      {printToDos(filteredTodos)}
     </Fragment>
   );
 }

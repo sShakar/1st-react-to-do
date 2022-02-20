@@ -22,8 +22,8 @@ const ToDo = ({ todo, todos, setTodos }) => {
 
   return (
     <Card>
-      <div className={`flex ${todo.completed ? '' : ''}`}>
-        <div className="flex items-center  w-3/4">
+      <div className={`flex`}>
+        <div className="flex items-center  w-3/4 sm:w-1/2">
           <li
             className={`${
               todo.completed ? 'opacity-50 line-through' : 'text-white'
@@ -32,7 +32,7 @@ const ToDo = ({ todo, todos, setTodos }) => {
             {todo.todo}
           </li>
         </div>
-        <div className="flex items-center w-1/3">
+        <div className="flex justify-end w-full">
           <Button onClick={doneHandler}>
             {!todo.completed ? 'Done' : 'Undone'}
           </Button>

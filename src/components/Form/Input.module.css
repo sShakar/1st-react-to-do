@@ -37,6 +37,24 @@
    justify-content: center;
 }
 
+@media (max-width: 640px) {
+   .input select {
+      margin-top: 1rem;
+      width: 8rem;
+   }
+
+   .input input {
+      width: 85%;
+      margin: auto;
+   }
+
+   .inputs-div {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+}
+
 .input input .input input:focus {
    outline: none;
 }

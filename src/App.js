@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     getLocalTodos();
-  }, []);
+  }, [filterHandler, saveLocalTodos]);
 
   useEffect(() => {
     filterHandler();

@@ -7,29 +7,6 @@ function App() {
   const [selection, setSelection] = useState('all');
   const [filteredTodos, setFilteredTodos] = useState([]);
 
-  useEffect(() => {
-    getLocalTodos();
-  }, []);
-
-  useEffect(() => {
-    filterHandler();
-    saveLocalTodos();
-  }, [todos, selection]);
-
-  const filterHandler = () => {
-    switch (selection) {
-      case 'completed':
-        setFilteredTodos(todos.filter((todo) => todo.completed)); // We filter out the ones that are completed
-        break;
-      case 'uncompleted':
-        setFilteredTodos(todos.filter((todo) => !todo.completed)); // We filter out the ones that are completed
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
-    }
-  };
-
   const handleTodos = (newTodo) => {
     setTodos((prevTodos) => [
       ...prevTodos,
@@ -53,10 +30,6 @@ function App() {
     );
   };
 
-  // Saving our data to local storage so it doesn't reset on refresh
-  const saveLocalTodos = () => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  };
   const getLocalTodos = () => {
     if (localStorage.getItem('todos') === null) {
       localStorage.setItem('todos', JSON.stringify([]));
@@ -65,6 +38,35 @@ function App() {
       setTodos(todoLocal);
     }
   };
+
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  useEffect(() => {
+    // filterHandler Function
+    const filterHandler = () => {
+      switch (selection) {
+        case 'completed':
+          setFilteredTodos(todos.filter((todo) => todo.completed)); // We filter out the ones that are completed
+          break;
+        case 'uncompleted':
+          setFilteredTodos(todos.filter((todo) => !todo.completed)); // We filter out the ones that are completed
+          break;
+        default:
+          setFilteredTodos(todos);
+          break;
+      }
+    };
+    filterHandler();
+
+    // saveLocalTodos Function
+    // Saving our data to local storage so it doesn't reset on refresh
+    const saveLocalTodos = () => {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    };
+    saveLocalTodos();
+  }, [todos, selection]);
 
   return (
     <Fragment>

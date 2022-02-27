@@ -7,13 +7,14 @@ const Input = (props) => {
   const [newTodo, setNewTodo] = useState('');
 
   const onInputHandler = (e) => {
-    setNewTodo(e.target.value.trim());
+    const td = e.target.value;
+    setNewTodo(td);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (newTodo !== undefined && newTodo !== '') {
-      props.handleTodos(newTodo);
+      props.handleTodos(newTodo.trim());
     }
     setNewTodo('');
   };
